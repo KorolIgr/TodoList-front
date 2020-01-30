@@ -17,11 +17,7 @@ class TodoList extends React.Component{
 
     new_list = () => {
 
-        const tasks = [];
-
-        this.setState({
-            tasks: tasks,
-        });
+        this.setState({tasks: []});
     }
 
     add_item = async (e) => {
@@ -30,35 +26,25 @@ class TodoList extends React.Component{
         const array = this.state.tasks.slice(0);
         const task= {Description: e.target.elements.Task.value , State: false};
         
-
         array.push(task);
 
-        this.setState({
-            tasks: array,
-        });
+        this.setState({tasks: array});
     
     }
 
     
+    change_state = (e, index) => {
+
+      const array = this.state.tasks.slice(0);
+      array[index].State = e.checked;
+
+      this.setState({tasks: array});
+
+    }
+
     clear_completed = () => {
-
-        const array = this.state.tasks.slice(0);
-        const result = [];
-
-        var i;
-        for (i = 0; i<array.length; i++) {
-
-          if(!array[i].State)
-          {
-            result.push(array[i]);
-          }
-        }
-        
-        this.setState({
-          tasks: result,
-        });
-
-      }
+      this.setState({tasks: this.state.tasks.filter(function(task) {return !task.State})});
+    }
       
       
 
@@ -68,11 +54,14 @@ class TodoList extends React.Component{
 
       <div>
         <div><Button text = {'Начать новый список'} handleClick = {this.new_list}/></div>
-        <div><Input onSubmit = {this.add_item}/></div>
+        <div><Input handleClick = {this.add_item}/></div>
         {
           this.state.tasks.map((task,index) =>
-                                                <Checkbox key={index} 
-                                                Task={task} 
+                                                <Checkbox key={index}
+                                                          Description = {task.Description}
+                                                          State = {task.State}
+                                                          Index = {index} 
+                                                          handleClick = {this.change_state}
                                                 />
                               )
         }

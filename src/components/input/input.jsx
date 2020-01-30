@@ -4,7 +4,7 @@ import './input.scss'
 
 const Input = (props) =>{
     return (
-        <form onSubmit={props.onSubmit}>
+        <form onSubmit={props.handleClick}>
             <input className = "main" type = "text" name="Task" placeholder="Задание" />
             <button className = "main">Enter</button>
         </form>
