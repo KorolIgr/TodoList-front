@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import TodoList from './app-components/TodoList/TodoList'
+import TodoList from './app-components/TodoList/TodoList_hooks'
 
 class App extends React.Component {
    

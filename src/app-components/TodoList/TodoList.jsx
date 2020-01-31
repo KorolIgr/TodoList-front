@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TodoList.scss'
 
 import Button from '../../components/button/button';
@@ -7,49 +7,35 @@ import Checkbox from '../../components/checkbox/checkbox'
 
 class TodoList extends React.Component{
 
-    DescriptionTask = ""
+  constructor(props) {
+      super(props);
+      this.state = {tasks: []};
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {tasks: []};
-      }
+  new_list = () => {
+      this.setState({tasks: []});
+  }
 
-
-    new_list = () => {
-
-        this.setState({tasks: []});
-    }
-
-    add_item = async (e) => {
-        e.preventDefault();
-
-        const array = this.state.tasks.slice(0);
-        const task= {Description: e.target.elements.Task.value , State: false};
-        
-        array.push(task);
-
-        this.setState({tasks: array});
-    
-    }
-
-    
-    change_state = (e, index) => {
-
+  add_item = async (e) => {
+      e.preventDefault();
       const array = this.state.tasks.slice(0);
-      array[index].State = e.checked;
-
+      const task= {Description: e.target.elements.Task.value , State: false};
+      array.push(task);
       this.setState({tasks: array});
+  }
+  
+  change_state = (e, index) => {
+    const array = this.state.tasks.slice(0);
+    array[index].State = e.checked;
+    this.setState({tasks: array});
+  }
 
-    }
-
-    clear_completed = () => {
-      this.setState({tasks: this.state.tasks.filter(function(task) {return !task.State})});
-    }
-      
-      
+  clear_completed = () => {
+    this.setState({tasks: this.state.tasks.filter(function(task) {return !task.State})});
+  }
 
   render(){
-        
+
     return (
 
       <div>
