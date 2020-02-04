@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import TodoList from './app-components/TodoList/TodoList_hooks'
+import Todo from './app-components/TodoList/TodoList_redux'
 
 class App extends React.Component {
    
   render() {
     return (
       <div>
-        <TodoList />
+        <Todo />
       </div>
     );
   }
